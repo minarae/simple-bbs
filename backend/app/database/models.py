@@ -90,7 +90,7 @@ class Board(Base):
     board_no = Column(INTEGER(unsigned=True), autoincrement=True, comment='게시판번호')
     board_id = Column(VARCHAR(20), nullable=False, comment='게시판아이디')
     member_no = Column(SMALLINT(unsigned=True), nullable=True, comment='작성자번호')
-    hit_cnt = Column(INTEGER(unsigned=True), nullable=False, comment='조회수')
+    hit_cnt = Column(INTEGER(unsigned=True), server_default=0, nullable=False, comment='조회수')
     title = Column(VARCHAR(255), nullable=False, comment='제목')
     contents = Column(Text, comment='게시글 내용')
     pure_contents = Column(Text, comment='html을 제거한 내용')

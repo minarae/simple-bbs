@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 from typing import Optional, Literal, List
-from datetime import date
+from datetime import date, datetime
 
 # 회원 가입에 대한 Request Schema
 class MemberCreate(BaseModel):
@@ -36,6 +36,19 @@ class LoginResponse(BaseModel):
     member_email: str = Field(title="사용자 이메일")
     access_token: str = Field(title="Access Token")
     refresh_token: str = Field(title="Refresh Token")
+
+class BoardUpsert(BaseModel):
+    member_no: Optional[str] = Field(title="작성자 회원 번호")
+    title: str = Field(title="게시글 제목")
+    contents: str = Field(title="게시글 내용")
+
+class BoardItem(BoardUpsert):
+    board_no: int = Field(title="게시물번호")
+    board_id: str = Field(title="게시판 아이디")
+    hit_cnt: int = Field(title="조회수")
+    pure_contents: str = Field(title="태그를 제거한 글 내용")
+    reg_dt: datetime = Field(title="생성일시")
+    upd_dt: datetime = Field(title="수정일시")
 
 class Message(BaseModel):
     message: str
